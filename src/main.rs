@@ -46,23 +46,61 @@ impl Fractal {
   }
 }
 
-fn main() {
+use clap::Parser;
+
+/// Simple program to greet a person
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+  /// generate a Julia set fractal instead of a Mandelbrot set.
+  #[arg(short, long)]
+  julia: bool,
+
+  /// resolution for x coordinate.
+  #[arg(long, default_value_t = 1024)]
+  x_res: u32,
+
+  /// resolution for y coordinate.
+  #[arg(long, default_value_t = 1024)]
+  y_res: u32,
+
+  /// minimum for x coordinate.
+  #[arg(long, default_value_t = -2.5, allow_hyphen_values = true)]
+  x_min: f64,
+
+  /// maximum for x coordinate.
+  #[arg(long, default_value_t = 2.5, allow_hyphen_values = true)]
+  x_max: f64,
+
+  /// minimum for y coordinate.
+  #[arg(long, default_value_t = -2.5, allow_hyphen_values = true)]
+  y_min: f64,
+
+  /// maximum for y coordinate.
+  #[arg(long, default_value_t = 2.5, allow_hyphen_values = true)]
+  y_max: f64,
+
+  /// x coordinate of constant c.
+  #[arg(long, default_value_t = 0.0, allow_hyphen_values = true)]
+  cx: f64,
+
+  /// y coordinate of constant c.
+  #[arg(long, default_value_t = 0.0, allow_hyphen_values = true)]
+  cy: f64,
+}
 
 fn main() {
-  // TODO: these should be args
-  let x_res = 1024;
-  let y_res = 1024;
-
-  let x_min = -2.1;
-  let x_max = 0.7;
-
-  let y_min = -1.2;
-  let y_max = 1.2;
-
-  //let cx = -0.4;
-  //let cy = 0.6;
-  let cx = -0.0;
-  let cy = 0.0;
+  let Args {
+    julia,
+    x_res,
+    y_res,
+    x_min,
+    x_max,
+    y_min,
+    y_max,
+    cx,
+    cy,
+  } = Args::parse();
 
   let fract = Fractal {
     x: Coord {
@@ -83,7 +121,12 @@ fn main() {
 
   // Iterate over the coordinates and pixels of the image
   for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
-    let i = 255 - fract.mandelbrot(x, y);
+    let f = if julia {
+      Fractal::julia
+    } else {
+      Fractal::mandelbrot
+    };
+    let i = 255 - f(&fract, x, y);
     *pixel = image::Rgb([i, i, i]);
   }
 
