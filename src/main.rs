@@ -44,6 +44,10 @@ struct Args {
   /// y coordinate of constant c.
   #[arg(long, default_value_t = 0.0, allow_hyphen_values = true)]
   cy: f64,
+
+  /// Output filename.
+  #[arg(short, long, value_name = "FILE", default_value_t = String::from("fractal.png"))]
+  output: String,
 }
 
 fn main() {
@@ -57,6 +61,7 @@ fn main() {
     y_max,
     cx,
     cy,
+    output,
   } = Args::parse();
 
   let fract = Fractal {
@@ -88,5 +93,5 @@ fn main() {
   }
 
   // Save the image as “fractal.png”, the format is deduced from the path
-  imgbuf.save("fractal.png").unwrap();
+  imgbuf.save(output).unwrap();
 }
