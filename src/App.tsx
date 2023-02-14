@@ -1,6 +1,4 @@
-import './App.css'
 import Map from './Map'
-import { LatLngExpression } from 'leaflet'
 
 function App() {
   return (
