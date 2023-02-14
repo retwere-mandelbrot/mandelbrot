@@ -14,5 +14,6 @@ const Template: ComponentStory<typeof Map> = args => <Map {...args} />
 
 export const Display = Template.bind({})
 Display.args = {
+  height: 800,
   position: [51.505, -0.09]
 }
