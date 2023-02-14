@@ -1,9 +1,6 @@
-mod coord;
-mod fractal;
-
-use crate::coord::Coord;
-use crate::fractal::Fractal;
 use clap::Parser;
+use mandelbrot::Coord;
+use mandelbrot::Fractal;
 
 /// Generates images of Mandelbrot sets and Julia sets.
 #[derive(Parser, Debug)]

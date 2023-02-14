@@ -1,11 +1,20 @@
 [package]
 name = "mandelbrot"
 version = "0.1.0"
+authors = ["Jake Fowler <retwere@gmail.com>"]
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "mandelbrot"
+path = "src/fractal.rs"
+
+[[bin]]
+name = "mandelbrot"
+path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4.1.4", features = ["derive"] }
 image = "0.24"
 num-complex = "0.4"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
