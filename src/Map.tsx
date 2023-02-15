@@ -29,7 +29,7 @@ function Map({ height }: MapProps) {
         [4.0, 4.0]
       ]}
     >
-      <TileLayer url="./tiles/{z}/{x}/{y}.png" />
+      <TileLayer url="http://localhost:8000/tilegen/{z}/{x}/{y}" />
     </MapContainer>
   )
 }
