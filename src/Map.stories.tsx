@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import React from 'react'
 
 import Map from './Map'
 
@@ -14,5 +15,5 @@ const Template: ComponentStory<typeof Map> = args => <Map {...args} />
 
 export const Display = Template.bind({})
 Display.args = {
-  height: 800,
+  height: 800
 }
