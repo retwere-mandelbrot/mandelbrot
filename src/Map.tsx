@@ -1,5 +1,4 @@
 import { CRS, extend, Transformation } from 'leaflet'
-import React from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import '../node_modules/leaflet/dist/leaflet.css'
 
