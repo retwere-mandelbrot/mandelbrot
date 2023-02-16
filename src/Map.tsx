@@ -14,7 +14,9 @@ function Map({ height }: MapProps) {
   return (
     <MapContainer
       center={[0.0, 0.0]}
-      zoom={0}
+      zoom={3}
+      minZoom={0}
+      maxZoom={50}
       scrollWheelZoom={false}
       style={{ height }}
       crs={mandelbrotCRS}
@@ -29,7 +31,7 @@ function Map({ height }: MapProps) {
         [4.0, 4.0]
       ]}
     >
-      <TileLayer url="http://localhost:8000/tilegen/{z}/{x}/{y}" />
+      <TileLayer url="http://localhost:8000/tilegen/{z}/{x}/{y}" maxZoom={50} maxNativeZoom={50} />
     </MapContainer>
   )
 }
