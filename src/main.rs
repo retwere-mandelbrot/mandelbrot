@@ -1,6 +1,10 @@
 use clap::Parser;
-use mandelbrot::Coord;
-use mandelbrot::Fractal;
+use image::ImageFormat;
+use mandelbrot::render;
+use mandelbrot::ComplexPlane;
+use mandelbrot::FractalConstructor;
+use mandelbrot::Julia;
+use mandelbrot::Mandelbrot;
 
 /// Generates images of Mandelbrot sets and Julia sets.
 #[derive(Parser, Debug)]
@@ -61,34 +65,18 @@ fn main() {
     output,
   } = Args::parse();
 
-  let fract = Fractal {
-    x: Coord {
-      min: x_min,
-      max: x_max,
-      samples: x_res,
-    },
-    y: Coord {
-      min: y_min,
-      max: y_max,
-      samples: y_res,
-    },
-    c: num_complex::Complex::new(cx, cy),
+  let domain = ComplexPlane::new(x_min, x_max, x_res, y_min, y_max, y_res);
+  let mut imgbuf =
+    image::ImageBuffer::<image::Rgb<u8>, _>::new(domain.coords.x.res, domain.coords.y.res);
+
+  if julia {
+    let fract = Julia::new(domain, (cx, cy));
+    render(&fract, &mut imgbuf);
+  } else {
+    let fract = Mandelbrot::new(domain, (cx, cy));
+    render(&fract, &mut imgbuf);
   };
 
-  // Create a new ImgBuf with width: imgx and height: imgy
-  let mut imgbuf = image::ImageBuffer::new(fract.x.samples, fract.y.samples);
-
-  // Iterate over the coordinates and pixels of the image
-  for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
-    let f = if julia {
-      Fractal::julia
-    } else {
-      Fractal::mandelbrot
-    };
-    let i = 255 - f(&fract, x, y);
-    *pixel = image::Rgb([i, i, i]);
-  }
-
-  // Save the image as “fractal.png”, the format is deduced from the path
-  imgbuf.save(output).unwrap();
+  // Save the image as "[output]", the format is deduced from the path
+  imgbuf.save_with_format(output, ImageFormat::Png).unwrap();
 }
