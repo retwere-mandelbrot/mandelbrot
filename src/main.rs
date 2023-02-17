@@ -51,6 +51,7 @@ struct Args {
   output: String,
 }
 
+// A command-line interface for generating mandelbrot set PNG images.
 fn main() {
   let Args {
     julia,
