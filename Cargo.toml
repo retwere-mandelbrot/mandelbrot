@@ -6,17 +6,22 @@ edition = "2021"
 
 [lib]
 name = "mandelbrot"
-path = "src/fractal.rs"
+path = "src/lib.rs"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
 name = "mandelbrot"
-path = "src/main.rs"
+path = "src/bin/cli.rs"
+
+[[bin]]
+name = "tileserver"
+path = "src/bin/tileserver.rs"
 
 [dependencies]
 clap = { version = "4.1.4", features = ["derive"] }
 image = "0.24"
 num-complex = "0.4"
+rocket = "0.5.0-rc.2"
 wasm-bindgen = "0.2.84"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

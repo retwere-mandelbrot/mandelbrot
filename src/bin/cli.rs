@@ -1,10 +1,5 @@
 use clap::Parser;
-use image::ImageFormat;
-use mandelbrot::render;
-use mandelbrot::ComplexPlane;
-use mandelbrot::FractalConstructor;
-use mandelbrot::Julia;
-use mandelbrot::Mandelbrot;
+use mandelbrot::{render_to_file, Axis, ComplexPlane, Julia, Mandelbrot, Plane};
 
 /// Generates images of Mandelbrot sets and Julia sets.
 #[derive(Parser, Debug)]
@@ -66,18 +61,29 @@ fn main() {
     output,
   } = Args::parse();
 
-  let domain = ComplexPlane::new(x_min, x_max, x_res, y_min, y_max, y_res);
-  let mut imgbuf =
-    image::ImageBuffer::<image::Rgb<u8>, _>::new(domain.coords.x.res, domain.coords.y.res);
-
-  if julia {
-    let fract = Julia::new(domain, (cx, cy));
-    render(&fract, &mut imgbuf);
-  } else {
-    let fract = Mandelbrot::new(domain, (cx, cy));
-    render(&fract, &mut imgbuf);
+  let x: Axis = Axis {
+    min: x_min,
+    max: x_max,
+    res: x_res,
   };
-
-  // Save the image as "[output]", the format is deduced from the path
-  imgbuf.save_with_format(output, ImageFormat::Png).unwrap();
+  let y: Axis = Axis {
+    min: y_min,
+    max: y_max,
+    res: y_res,
+  };
+  let coords: Plane = Plane { x, y };
+  let domain: ComplexPlane = ComplexPlane { coords };
+  if julia {
+    let fract = Julia {
+      cx: domain,
+      c: num_complex::Complex::new(cx, cy),
+    };
+    render_to_file(&fract, &output).unwrap();
+  } else {
+    let fract = Mandelbrot {
+      cx: domain,
+      c: num_complex::Complex::new(cx, cy),
+    };
+    render_to_file(&fract, &output).unwrap();
+  };
 }
