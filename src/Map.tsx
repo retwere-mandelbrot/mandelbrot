@@ -30,7 +30,7 @@ function Map({ height }: MapProps) {
         [4.0, 4.0]
       ]}
     >
-      <TileLayer url="http://localhost:8000/tilegen/{z}/{x}/{y}" maxZoom={50} maxNativeZoom={50} />
+      <TileLayer url="http://localhost:8000/mandelbrot/{z}/{x}/{y}" maxZoom={50} maxNativeZoom={50} />
     </MapContainer>
   )
 }
