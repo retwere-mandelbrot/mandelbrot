@@ -1,15 +1,19 @@
 import { CRS, extend, Transformation } from 'leaflet'
+import { PropsWithChildren } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import '../node_modules/leaflet/dist/leaflet.css'
 
-type MapProps = {
-  height: number
+type FractalProps = {
+  height: number,
+  url: string
 }
-const mandelbrotCRS = extend({}, CRS.Simple, {
+
+const FRACTAL_CRS = extend({}, CRS.Simple, {
   transformation: new Transformation(32, 128, -32, 128)
 })
 
-function Map({ height }: MapProps) {
+function Fractal({ height, url, children }: PropsWithChildren<FractalProps>) {
+  const url_pattern = `${url}/{z}/{x}/{y}/`
   return (
     <MapContainer
       center={[0.0, 0.0]}
@@ -18,21 +22,12 @@ function Map({ height }: MapProps) {
       maxZoom={50}
       scrollWheelZoom={false}
       style={{ height }}
-      crs={mandelbrotCRS}
-      // FIXME: this should be the initial viewport:
-      bounds={[
-        [-2.0, -1.25],
-        [0.5, 1.25]
-      ]}
-      // FIXME: this should be the d limits (no gray area):
-      maxBounds={[
-        [-4.0, -4.0],
-        [4.0, 4.0]
-      ]}
+      crs={FRACTAL_CRS}
     >
-      <TileLayer url="http://localhost:8000/mandelbrot/{z}/{x}/{y}" maxZoom={50} maxNativeZoom={50} />
+      {children}
+      <TileLayer url={url_pattern} maxZoom={50} maxNativeZoom={50} />
     </MapContainer>
   )
 }
 
-export default Map
+export default Fractal
