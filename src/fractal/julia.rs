@@ -1,4 +1,4 @@
-use crate::{ComplexPlane, Fractal};
+use crate::{ComplexPlane, Fractal, Tile};
 
 pub struct Julia {
   pub cx: ComplexPlane,
@@ -18,5 +18,14 @@ impl Fractal for Julia {
 
   fn res(&self) -> (u32, u32) {
     self.cx.res()
+  }
+}
+
+impl Tile for Julia {
+  fn tile(&self, zoom: u32, p: (i64, i64)) -> Julia {
+    Julia {
+      cx: self.cx.tile(zoom, p),
+      c: self.c,
+    }
   }
 }

@@ -1,5 +1,4 @@
-use crate::ComplexPlane;
-use crate::Fractal;
+use crate::{ComplexPlane, Fractal, Tile};
 
 pub struct Mandelbrot {
   pub cx: ComplexPlane,
@@ -22,8 +21,8 @@ impl Fractal for Mandelbrot {
   }
 }
 
-impl Mandelbrot {
-  pub fn tile(&self, zoom: u32, p: (i64, i64)) -> Mandelbrot {
+impl Tile for Mandelbrot {
+  fn tile(&self, zoom: u32, p: (i64, i64)) -> Mandelbrot {
     Mandelbrot {
       cx: self.cx.tile(zoom, p),
       c: self.c,
