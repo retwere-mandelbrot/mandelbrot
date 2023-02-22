@@ -5,6 +5,7 @@ pub struct Axis {
 }
 
 impl Axis {
+  // Amount covered by each sample.
   pub fn scale(&self) -> f64 {
     (self.max - self.min) / self.res as f64
   }

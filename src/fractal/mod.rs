@@ -12,3 +12,6 @@ pub use julia::Julia;
 
 mod mandelbrot;
 pub use mandelbrot::Mandelbrot;
+
+mod coords;
+pub use coords::{Axis, ComplexPlane, Plane};
