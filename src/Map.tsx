@@ -3,16 +3,16 @@ import { PropsWithChildren } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import '../node_modules/leaflet/dist/leaflet.css'
 
-type FractalProps = {
+type MapProps = {
   height: number,
   url: string
 }
 
-const FRACTAL_CRS = extend({}, CRS.Simple, {
+export const FRACTAL_CRS = extend({}, CRS.Simple, {
   transformation: new Transformation(32, 128, -32, 128)
 })
 
-function Fractal({ height, url, children }: PropsWithChildren<FractalProps>) {
+function Map({ height, url, children }: PropsWithChildren<MapProps>) {
   const url_pattern = `${url}/{z}/{x}/{y}/`
   return (
     <MapContainer
@@ -30,4 +30,4 @@ function Fractal({ height, url, children }: PropsWithChildren<FractalProps>) {
   )
 }
 
-export default Fractal
+export default Map
