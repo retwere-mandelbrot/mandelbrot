@@ -1,7 +1,8 @@
 .cache
 .vscode
-target
+/*.png
+build
+dist
+node_modules
 pkg
 target
-node_modules
-/*.png
