@@ -3,4 +3,5 @@
 /target
 /web/pkg
 /web/target
+/web/node_modules
 *.png
