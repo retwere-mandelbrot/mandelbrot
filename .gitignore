@@ -1,4 +1,6 @@
 /.cache
 /.vscode
 /target
+/web/pkg
+/web/target
 *.png
