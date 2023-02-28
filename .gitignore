@@ -1,7 +1,7 @@
-/.cache
-/.vscode
-/target
-/web/pkg
-/web/target
-/web/node_modules
-*.png
+.cache
+.vscode
+target
+pkg
+target
+node_modules
+/*.png
