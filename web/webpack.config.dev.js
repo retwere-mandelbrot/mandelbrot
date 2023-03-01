@@ -15,6 +15,7 @@ module.exports = {
       crateDirectory: path.resolve(__dirname, '.')
     })
   ],
+  devtool: 'inline-source-map',
   mode: 'development',
   experiments: {
     asyncWebAssembly: true
