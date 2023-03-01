@@ -1,6 +1,6 @@
 use std::ops::{Deref, DerefMut};
 
-use crate::Fractal;
+use fractal::Fractal;
 use image::{ImageBuffer, ImageError, ImageFormat, Rgb};
 
 pub fn render<Container>(fract: &dyn Fractal, imgbuf: &mut ImageBuffer<Rgb<u8>, Container>) -> ()

@@ -476,6 +476,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 
 [[package]]
+name = "fractal"
+version = "0.1.0"
+dependencies = [
+ "num-complex",
+]
+
+[[package]]
 name = "futures"
 version = "0.3.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -892,16 +899,6 @@ dependencies = [
  "serde_json",
  "tracing",
  "tracing-subscriber",
-]
-
-[[package]]
-name = "mandelbrot"
-version = "0.1.0"
-dependencies = [
- "clap",
- "image",
- "num-complex",
- "rocket",
 ]
 
 [[package]]
@@ -1348,6 +1345,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
 dependencies = [
  "winapi",
+]
+
+[[package]]
+name = "retwere-mandelbrot"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "fractal",
+ "image",
+ "num-complex",
+ "rocket",
 ]
 
 [[package]]

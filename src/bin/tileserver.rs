@@ -1,7 +1,8 @@
 #[macro_use]
 extern crate rocket;
 
-use mandelbrot::{render_to_file, Axis, ComplexPlane, Julia, Mandelbrot, Plane, Tile};
+use fractal::{Axis, ComplexPlane, Julia, Mandelbrot, Plane, Tile};
+use retwere_mandelbrot::render::render_to_file;
 use rocket::fs::NamedFile;
 use std::fs;
 use std::path::Path;

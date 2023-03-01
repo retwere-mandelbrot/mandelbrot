@@ -1,16 +1,11 @@
 [package]
-name = "mandelbrot"
+name = "retwere-mandelbrot"
 version = "0.1.0"
 authors = ["Jake Fowler <retwere@gmail.com>"]
 edition = "2021"
 
-[lib]
-name = "mandelbrot"
-path = "src/lib.rs"
-crate-type = ["cdylib", "rlib"]
-
 [[bin]]
-name = "mandelbrot"
+name = "fractal"
 path = "src/bin/cli.rs"
 
 [[bin]]
@@ -19,6 +14,7 @@ path = "src/bin/tileserver.rs"
 
 [dependencies]
 clap = { version = "4.1", features = ["derive"] }
+fractal = { path = "./fractal" }
 image = "0.24"
 num-complex = "0.4"
 rocket = "0.5.0-rc.2"

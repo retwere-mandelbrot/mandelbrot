@@ -1,5 +1,6 @@
 use clap::Parser;
-use mandelbrot::{render_to_file, Axis, ComplexPlane, Julia, Mandelbrot, Plane};
+use fractal::{Axis, ComplexPlane, Julia, Mandelbrot, Plane};
+use retwere_mandelbrot::render::render_to_file;
 
 /// Generates images of Mandelbrot sets and Julia sets.
 #[derive(Parser, Debug)]
