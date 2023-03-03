@@ -2,7 +2,7 @@
 
 members = [
     "apps",
-    "fractal",
+    "lib",
     "web"
 ]
 
