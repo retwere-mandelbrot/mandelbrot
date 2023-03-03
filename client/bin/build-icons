@@ -1,0 +1,5 @@
+#!/bin/sh
+#   build-icons -- makes a little mandelbrot set image to use as an icon.
+
+cd ../lib
+cargo run -r --bin mandelbrot -- -o ../client/public/icon.png --x-res 512 --y-res 512 --x-min -2.0 --x-max 0.5 --y-min -1.25 --y-max 1.25
