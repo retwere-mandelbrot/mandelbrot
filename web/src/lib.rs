@@ -1,8 +1,11 @@
-use fractal::{render, Axis, ComplexPlane, Fractal, Mandelbrot, Plane, Tile};
+use fractal::{Axis, ComplexPlane, Fractal, Mandelbrot, Plane, Tile};
 use std::f64;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::Clamped;
 use web_sys::{CanvasRenderingContext2d, ImageData};
+
+mod render;
+use render::render;
 
 const RESOLUTION: u32 = 512;
 const X: Axis = Axis {
@@ -24,21 +27,19 @@ const MANDELBROT: Mandelbrot = Mandelbrot {
   c: num_complex::Complex::new(C.0, C.1),
 };
 
-// #[wasm_bindgen]
-// pub fn render_mandelbrot(
-//   zoom: u32,
-//   x: i64,
-//   y: i64,
-//   context: &CanvasRenderingContext2d,
-// ) -> (Result<(), JsValue>) {
-//   let fract = MANDELBROT.tile(zoom, (x, y));
-//   let res = fract.res();
-//   let mut image_data = context.create_image_data_with_imagedata(res.0, res.1);
-//   let mut data = image_data.data;
-//   render(&fract, &mut data);
-//   let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), res.0, res.1)?;
-//   context.put_image_data(&data, 0.0, 0.0)
-// }
+#[wasm_bindgen]
+pub fn render_mandelbrot(
+  zoom: u32,
+  x: i64,
+  y: i64,
+  context: &CanvasRenderingContext2d,
+) -> Result<(), JsValue> {
+  let fract = MANDELBROT.tile(zoom, (x, y));
+  let res = fract.res();
+  let mut raw = render(&fract);
+  let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut raw), res.0, res.1)?;
+  context.put_image_data(&data, 0.0, 0.0)
+}
 
 #[wasm_bindgen]
 pub fn render_smiley(context: &CanvasRenderingContext2d) -> () {
