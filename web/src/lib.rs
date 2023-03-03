@@ -24,21 +24,21 @@ const MANDELBROT: Mandelbrot = Mandelbrot {
   c: num_complex::Complex::new(C.0, C.1),
 };
 
-#[wasm_bindgen]
-pub fn render_mandelbrot(
-  zoom: u32,
-  x: i64,
-  y: i64,
-  context: &CanvasRenderingContext2d,
-) -> (Result<(), JsValue>) {
-  let fract = MANDELBROT.tile(zoom, (x, y));
-  let res = fract.res();
-  let mut image_data = context.create_image_data_with_imagedata(res.0, res.1);
-  let mut data = image_data.data;
-  render(&fract, &mut data);
-  let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), res.0, res.1)?;
-  context.put_image_data(&data, 0.0, 0.0)
-}
+// #[wasm_bindgen]
+// pub fn render_mandelbrot(
+//   zoom: u32,
+//   x: i64,
+//   y: i64,
+//   context: &CanvasRenderingContext2d,
+// ) -> (Result<(), JsValue>) {
+//   let fract = MANDELBROT.tile(zoom, (x, y));
+//   let res = fract.res();
+//   let mut image_data = context.create_image_data_with_imagedata(res.0, res.1);
+//   let mut data = image_data.data;
+//   render(&fract, &mut data);
+//   let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), res.0, res.1)?;
+//   context.put_image_data(&data, 0.0, 0.0)
+// }
 
 #[wasm_bindgen]
 pub fn render_smiley(context: &CanvasRenderingContext2d) -> () {

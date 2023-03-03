@@ -7,6 +7,7 @@ rust
   .then(m => {
     let tile = document.createElement('canvas')
     document.body.appendChild(tile)
-    m.render_mandelbrot(0, BigInt(0), BigInt(0), tile.getContext('2d'))
+    //m.render_mandelbrot(0, BigInt(0), BigInt(0), tile.getContext('2d'))
+    m.render_smiley(tile.getContext('2d'))
   })
   .catch(console.error)
