@@ -4,7 +4,8 @@ const webpack = require('webpack')
 const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin')
 
 module.exports = {
-  entry: './index.js',
+  context: path.resolve(__dirname, '.'),
+  entry: path.resolve(__dirname, './src/example.js'),
   output: {
     path: path.resolve(__dirname, 'build/dev'),
     filename: 'index.js'
@@ -12,7 +13,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(),
     new WasmPackPlugin({
-      crateDirectory: path.resolve(__dirname, '.')
+      crateDirectory: path.resolve(__dirname, '.'),
+      outDir: path.resolve(__dirname, 'build/pkg')
     })
   ],
   devtool: 'inline-source-map',

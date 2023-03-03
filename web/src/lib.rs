@@ -68,5 +68,3 @@ pub fn render_smiley(context: &CanvasRenderingContext2d) -> () {
 
   context.stroke();
 }
-
-pub fn foo() {}
