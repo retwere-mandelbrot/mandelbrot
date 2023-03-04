@@ -1,7 +1,7 @@
 {
   "name": "mandelbrot-web",
   "version": "1.0.0",
-  "main": "src/example.js",
+  "main": "example.js",
   "license": "MIT",
   "dependencies": {},
   "scripts": {
