@@ -14,4 +14,8 @@ const Template: ComponentStory<typeof Mandelbrot> = args => {
 }
 
 export const Image = Template.bind({})
-Image.args = {}
+Image.args = {
+  x: 0,
+  y: 0,
+  zoom: 0
+}

@@ -2,6 +2,7 @@ use fractal::{Axis, ComplexPlane, Fractal, Julia, Mandelbrot, Plane, Tile};
 use std::f64;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::Clamped;
+use web_sys::HtmlCanvasElement;
 use web_sys::{CanvasRenderingContext2d, ImageData};
 
 mod render;
@@ -39,6 +40,20 @@ pub fn render_mandelbrot(
   let mut raw = render(&fract);
   let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut raw), res.0, res.1)?;
   context.put_image_data(&data, 0.0, 0.0)
+}
+
+#[wasm_bindgen]
+pub fn mandelbrot_tile(zoom: u32, x: i64, y: i64) -> Result<HtmlCanvasElement, JsValue> {
+  let document = web_sys::window().unwrap().document().unwrap();
+  let canvas = document
+    .create_element("canvas")?
+    .dyn_into::<web_sys::HtmlCanvasElement>()?;
+  let context = canvas
+    .get_context("2d")?
+    .unwrap()
+    .dyn_into::<web_sys::CanvasRenderingContext2d>()?;
+  render_mandelbrot(zoom, x, y, &context)?;
+  Ok(canvas)
 }
 
 #[wasm_bindgen]
