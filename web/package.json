@@ -1,12 +1,13 @@
 {
   "name": "mandelbrot-web",
   "version": "1.0.0",
-  "main": "example.js",
+  "main": "index.js",
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "build": "wasm-pack build -d build/pkg",
-    "start": "webpack serve"
+    "build": "webpack --config webpack.config.prod.js",
+    "build:web": "wasm-pack build -d build/web --target web",
+    "start": "webpack serve --config webpack.config.dev.js"
   },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "^1.6.0",
