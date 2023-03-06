@@ -1,4 +1,4 @@
-use fractal::{Axis, ComplexPlane, Fractal, Mandelbrot, Plane, Tile};
+use fractal::{Axis, ComplexPlane, Fractal, Julia, Mandelbrot, Plane, Tile};
 use std::f64;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::Clamped;
@@ -35,6 +35,26 @@ pub fn render_mandelbrot(
   context: &CanvasRenderingContext2d,
 ) -> Result<(), JsValue> {
   let fract = MANDELBROT.tile(zoom, (x, y));
+  let res = fract.res();
+  let mut raw = render(&fract);
+  let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut raw), res.0, res.1)?;
+  context.put_image_data(&data, 0.0, 0.0)
+}
+
+#[wasm_bindgen]
+pub fn render_julia(
+  cx: f64,
+  cy: f64,
+  zoom: u32,
+  x: i64,
+  y: i64,
+  context: &CanvasRenderingContext2d,
+) -> Result<(), JsValue> {
+  let base: Julia = Julia {
+    cx: DOMAIN,
+    c: num_complex::Complex::new(cx, cy),
+  };
+  let fract = base.tile(zoom, (x, y));
   let res = fract.res();
   let mut raw = render(&fract);
   let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut raw), res.0, res.1)?;

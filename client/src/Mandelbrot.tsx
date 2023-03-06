@@ -1,41 +1,30 @@
-import { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import init, { render_mandelbrot } from 'fractal-web'
 
-async function f(context: CanvasRenderingContext2D) {
+async function render(x: number, y: number, zoom: number, context: CanvasRenderingContext2D) {
   try {
     await init()
-    render_mandelbrot(0, BigInt(0), BigInt(0), context)
+    render_mandelbrot(zoom, BigInt(x), BigInt(y), context)
   } catch (e) {
     console.error(e)
   }
 }
 
 type MandelbrotProps = {
-  res: number
-  x_min: number
-  x_max: number
-  y_min: number
-  y_max: number
+  x: number
+  y: number
+  zoom: number
 }
 
-function Mandelbrot({
-  res = 512,
-  x_min = -4.0,
-  x_max = 4.0,
-  y_min = -4.0,
-  y_max = 4.0
-}: MandelbrotProps) {
+function Mandelbrot({ x, y, zoom }: MandelbrotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
     const context = canvas?.getContext('2d')!
-    // //Our first draw
-    // context.fillStyle = '#ff00dd'
-    // context.fillRect(0, 0, context.canvas.width, context.canvas.height)
-    f(context)
-  }, [])
+    render(x, y, zoom, context)
+  }, [x, y, zoom])
 
-  return <canvas ref={canvasRef} width={res} height={res} />
+  return <canvas ref={canvasRef} width={512} height={512} />
 }
 export default Mandelbrot
