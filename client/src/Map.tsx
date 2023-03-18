@@ -1,7 +1,8 @@
 import { CRS, extend, Transformation } from 'leaflet'
 import { PropsWithChildren } from 'react'
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer } from 'react-leaflet'
 import '../node_modules/leaflet/dist/leaflet.css'
+import FractalLayer from './FractalLayer'
 
 type MapProps = {
   height: number,
@@ -25,7 +26,7 @@ function Map({ height, url, children }: PropsWithChildren<MapProps>) {
       crs={FRACTAL_CRS}
     >
       {children}
-      <TileLayer url={url_pattern} maxZoom={50} maxNativeZoom={50} />
+      <FractalLayer />
     </MapContainer>
   )
 }
