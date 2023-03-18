@@ -21,10 +21,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "build-all": "yarn build-icons && yarn build-react && yarn build-storybook",
     "build-icons": "./bin/build-icons",
     "build-react": "react-scripts build",
     "build-storybook": "build-storybook -s public",
-    "build": "yarn build-icons && yarn build-react && yarn build-storybook",
+    "build": "yarn build-icons && yarn build-react",
     "eject": "react-scripts eject",
     "start-react": "react-scripts start",
     "start-storybook": "start-storybook -p 6006 -s public",
