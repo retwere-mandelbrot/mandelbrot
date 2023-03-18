@@ -14,7 +14,6 @@ export const FRACTAL_CRS = extend({}, CRS.Simple, {
 })
 
 function Map({ height, url, children }: PropsWithChildren<MapProps>) {
-  const url_pattern = `${url}/{z}/{x}/{y}/`
   return (
     <MapContainer
       center={[0.0, 0.0]}
