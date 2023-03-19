@@ -2,7 +2,6 @@ use fractal::{Axis, ComplexPlane, Fractal, Julia, Mandelbrot, Plane, Tile};
 use std::f64;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::Clamped;
-use web_sys::HtmlCanvasElement;
 use web_sys::{CanvasRenderingContext2d, ImageData};
 
 mod render;
