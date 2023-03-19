@@ -60,31 +60,3 @@ pub fn render_julia(
   let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut raw), res.0, res.1)?;
   context.put_image_data(&data, 0.0, 0.0)
 }
-
-#[wasm_bindgen]
-pub fn render_smiley(context: &CanvasRenderingContext2d) -> () {
-  context.begin_path();
-
-  // Draw the outer circle.
-  context
-    .arc(75.0, 75.0, 50.0, 0.0, f64::consts::PI * 2.0)
-    .unwrap();
-
-  // Draw the mouth.
-  context.move_to(110.0, 75.0);
-  context.arc(75.0, 75.0, 35.0, 0.0, f64::consts::PI).unwrap();
-
-  // Draw the left eye.
-  context.move_to(65.0, 65.0);
-  context
-    .arc(60.0, 65.0, 5.0, 0.0, f64::consts::PI * 2.0)
-    .unwrap();
-
-  // Draw the right eye.
-  context.move_to(95.0, 65.0);
-  context
-    .arc(90.0, 65.0, 5.0, 0.0, f64::consts::PI * 2.0)
-    .unwrap();
-
-  context.stroke();
-}
