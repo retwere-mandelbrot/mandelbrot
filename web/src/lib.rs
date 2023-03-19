@@ -43,20 +43,6 @@ pub fn render_mandelbrot(
 }
 
 #[wasm_bindgen]
-pub fn mandelbrot_tile(zoom: u32, x: i64, y: i64) -> Result<HtmlCanvasElement, JsValue> {
-  let document = web_sys::window().unwrap().document().unwrap();
-  let canvas = document
-    .create_element("canvas")?
-    .dyn_into::<web_sys::HtmlCanvasElement>()?;
-  let context = canvas
-    .get_context("2d")?
-    .unwrap()
-    .dyn_into::<web_sys::CanvasRenderingContext2d>()?;
-  render_mandelbrot(zoom, x, y, &context)?;
-  Ok(canvas)
-}
-
-#[wasm_bindgen]
 pub fn render_julia(
   cx: f64,
   cy: f64,
